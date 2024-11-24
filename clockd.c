@@ -118,6 +118,12 @@ int hexToDec(char ch) {
 int main(int argc, char** argv) {
 
     for (int i = 0; i < argc; ++i) {
+        if (!strcmp(argv[i], "--help")) {
+            printf("Usage: clockd [option]\n\n");
+            printf("  -c [color]    Sets color (expects #rrggbb as color)\n");
+            return 0;
+        }
+
         if (!strcmp(argv[i], "-c")) {
             if (argc-i < 1) break;
             int len = 0;
