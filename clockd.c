@@ -116,17 +116,6 @@ int hexToDec(char ch) {
 }
 
 int main(int argc, char** argv) {
-    time_t t = time(NULL);
-    struct tm *tm_info = localtime(&t);
-
-    int hour = tm_info->tm_hour;
-    int minute = tm_info->tm_min;
-
-    struct winsize w;
-    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) {
-        perror("ioctl");
-        return 1;
-    }
 
     for (int i = 0; i < argc; ++i) {
         if (!strcmp(argv[i], "-c")) {
@@ -150,6 +139,18 @@ int main(int argc, char** argv) {
     clear();
     while (1) {
         clear();
+        time_t t = time(NULL);
+        struct tm *tm_info = localtime(&t);
+
+        int hour = tm_info->tm_hour;
+        int minute = tm_info->tm_min;
+
+        struct winsize w;
+        if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) {
+            perror("ioctl");
+            return 1;
+        }
+
         int x = w.ws_col/2-15;
         int y = w.ws_row/2-2;
 
